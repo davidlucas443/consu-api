@@ -5,9 +5,6 @@ const API_URL = 'https://api.themoviedb.org/3';
 
 const api = axios.create({
   baseURL: API_URL,
-  headers: {
-    Authorization: `Bearer ${TMDB_API_KEY}`,
-  },
 });
 
 export const getImageUrl = (path, width = 500) => {
@@ -17,19 +14,19 @@ export const getImageUrl = (path, width = 500) => {
 
 export const getPopularMovies = (page = 1) => {
   return api.get('/movie/popular', {
-    params: { page, language: 'pt-BR' },
+    params: { api_key: TMDB_API_KEY, page, language: 'pt-BR' },
   });
 };
 
 export const searchMovies = (query, page = 1) => {
   return api.get('/search/movie', {
-    params: { query, page, language: 'pt-BR' },
+    params: { api_key: TMDB_API_KEY, query, page, language: 'pt-BR' },
   });
 };
 
 export const getMovieDetails = (movieId) => {
   return api.get(`/movie/${movieId}`, {
-    params: { language: 'pt-BR' },
+    params: { api_key: TMDB_API_KEY, language: 'pt-BR' },
   });
 };
 
