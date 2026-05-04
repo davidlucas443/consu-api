@@ -6,19 +6,34 @@ import {
   Image,
   StyleSheet,
   Alert,
+  TouchableOpacity,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { getMovieDetails, getImageUrl } from '../services/api';
 import { Header, LoadingSpinner } from '../components';
 import { COLORS, SPACING } from '../styles/theme';
+import { addFavorite, removeFavorite, getFavorites } from '../utils/storage';
 
 export const MovieDetailsScreen = ({ route, navigation }) => {
   const { movieId } = route.params;
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isFavorited, setIsFavorited] = useState(false);
 
   useEffect(() => {
     loadMovie();
+    checkIfFavorited();
   }, [movieId]);
+
+  const checkIfFavorited = async () => {
+    try {
+      const favs = await getFavorites();
+      const isFav = favs.some(f => f.id === movieId);
+      setIsFavorited(isFav);
+    } catch (err) {
+      console.error('Error checking favorite', err);
+    }
+  };
 
   const loadMovie = async () => {
     try {
@@ -29,6 +44,24 @@ export const MovieDetailsScreen = ({ route, navigation }) => {
       navigation.goBack();
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleToggleFavorite = async () => {
+    if (!movie) return;
+    
+    try {
+      if (isFavorited) {
+        await removeFavorite(movieId);
+        Alert.alert('Sucesso', 'Removido dos favoritos');
+      } else {
+        await addFavorite(movie);
+        Alert.alert('Sucesso', 'Adicionado aos favoritos');
+      }
+      setIsFavorited(!isFavorited);
+    } catch (err) {
+      Alert.alert('Erro', 'Falha ao atualizar favorito');
+      console.error('Error toggling favorite', err);
     }
   };
 
@@ -65,6 +98,20 @@ export const MovieDetailsScreen = ({ route, navigation }) => {
             <Text style={styles.year}>
               {movie.release_date?.substring(0, 4)}
             </Text>
+            
+            <TouchableOpacity 
+              style={[styles.favoriteBtn, isFavorited && styles.favoriteBtnActive]}
+              onPress={handleToggleFavorite}
+            >
+              <Ionicons 
+                name={isFavorited ? "heart" : "heart-outline"}
+                size={20} 
+                color={isFavorited ? COLORS.primary : COLORS.white}
+              />
+              <Text style={[styles.favoriteBtnText, isFavorited && styles.favoriteBtnTextActive]}>
+                {isFavorited ? 'Favoritado' : 'Favoritar'}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -143,6 +190,31 @@ const styles = StyleSheet.create({
   year: {
     fontSize: 12,
     color: COLORS.muted,
+    marginBottom: SPACING.medium,
+  },
+  favoriteBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.surface,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    paddingHorizontal: SPACING.medium,
+    paddingVertical: SPACING.small,
+    borderRadius: 8,
+    gap: SPACING.small,
+  },
+  favoriteBtnActive: {
+    backgroundColor: COLORS.primary,
+    borderColor: COLORS.primary,
+  },
+  favoriteBtnText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: COLORS.white,
+  },
+  favoriteBtnTextActive: {
+    color: COLORS.white,
   },
   section: {
     paddingHorizontal: SPACING.medium,
