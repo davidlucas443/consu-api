@@ -8,14 +8,20 @@ export const MovieCard = ({ movie, onPress }) => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      {posterUrl && (
-        <Image source={{ uri: posterUrl }} style={styles.poster} />
-      )}
+      <View style={styles.posterContainer}>
+        {posterUrl ? (
+          <Image source={{ uri: posterUrl }} style={styles.poster} />
+        ) : (
+          <View style={styles.posterPlaceholder} />
+        )}
+      </View>
       <View style={styles.info}>
         <Text style={styles.title} numberOfLines={2}>{movie.title}</Text>
-        <Text style={styles.rating}>
-          ⭐ {movie.vote_average?.toFixed(1) || 'N/A'}/10
-        </Text>
+        <View style={styles.metaRow}>
+          <Text style={styles.rating}>
+            ⭐ {movie.vote_average?.toFixed(1) || 'N/A'}
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -23,29 +29,48 @@ export const MovieCard = ({ movie, onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     margin: SPACING.small,
-    backgroundColor: COLORS.white,
-    borderRadius: 8,
+    backgroundColor: '#111111',
+    borderRadius: 18,
     overflow: 'hidden',
-    elevation: 3,
+    borderWidth: 1,
+    borderColor: '#2A2A2A',
+    elevation: 5,
+  },
+  posterContainer: {
+    aspectRatio: 2 / 3,
+    backgroundColor: '#1C1C1C',
   },
   poster: {
     width: '100%',
-    height: 240,
-    backgroundColor: COLORS.lightGray,
+    height: '100%',
+  },
+  posterPlaceholder: {
+    flex: 1,
+    backgroundColor: '#1C1C1C',
   },
   info: {
-    padding: SPACING.medium,
+    paddingHorizontal: SPACING.medium,
+    paddingVertical: SPACING.medium,
+    minHeight: 92,
+    justifyContent: 'space-between',
   },
   title: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: COLORS.white,
     marginBottom: SPACING.small,
+    lineHeight: 20,
+  },
+  metaRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   rating: {
-    fontSize: 14,
-    color: COLORS.primary,
+    fontSize: 13,
+    color: '#FFC857',
     fontWeight: '600',
   },
 });
