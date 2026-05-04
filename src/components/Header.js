@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.background,
     paddingTop: 16,
-    paddingHorizontal: SPACING.medium,
+    paddingHorizontal: SPACING.large,
     paddingBottom: 14,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
