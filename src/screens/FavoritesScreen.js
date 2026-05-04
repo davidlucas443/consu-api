@@ -21,7 +21,7 @@ export const FavoritesScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header title="Favoritos" />
+      <Header title="Favoritos" subtitle="Sua coleção salva" />
 
       {favorites.length === 0 ? (
         <View style={styles.empty}>

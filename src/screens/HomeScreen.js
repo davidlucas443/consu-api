@@ -52,7 +52,7 @@ export const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header title="Filmes" />
+      <Header title="Filmes" subtitle="Explore os destaques" />
 
       <View style={styles.searchBox}>
         <TextInput
