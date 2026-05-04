@@ -3,6 +3,7 @@ import {
   View,
   FlatList,
   StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
   Alert,
@@ -88,20 +89,22 @@ export const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.background,
   },
   searchBox: {
     flexDirection: 'row',
     alignItems: 'center',
     margin: SPACING.medium,
-    backgroundColor: COLORS.lightGray,
-    borderRadius: 8,
+    backgroundColor: COLORS.surface,
+    borderRadius: 14,
     paddingHorizontal: SPACING.medium,
+    borderWidth: 1,
+    borderColor: COLORS.border,
   },
   searchInput: {
     flex: 1,
     height: 44,
-    color: COLORS.text,
+    color: COLORS.white,
     fontSize: 16,
   },
   clearBtn: {
@@ -111,6 +114,7 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingHorizontal: SPACING.small,
+    paddingBottom: SPACING.large,
   },
 });
 

@@ -107,12 +107,12 @@ export const MovieDetailsScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.background,
   },
   backdrop: {
     width: '100%',
     height: 200,
-    backgroundColor: COLORS.lightGray,
+    backgroundColor: COLORS.surface,
   },
   content: {
     flexDirection: 'row',
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: COLORS.white,
     marginBottom: SPACING.small,
   },
   rating: {
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   },
   year: {
     fontSize: 12,
-    color: '#999',
+    color: COLORS.muted,
   },
   section: {
     paddingHorizontal: SPACING.medium,
@@ -151,17 +151,17 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: COLORS.text,
+    color: COLORS.white,
     marginBottom: SPACING.small,
   },
   synopsis: {
     fontSize: 14,
-    color: COLORS.text,
+    color: COLORS.white,
     lineHeight: 20,
   },
   detail: {
     fontSize: 13,
-    color: COLORS.text,
+    color: COLORS.white,
     marginBottom: SPACING.small,
   },
   genresList: {

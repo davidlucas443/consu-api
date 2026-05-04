@@ -51,7 +51,7 @@ export const FavoritesScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.background,
   },
   empty: {
     flex: 1,
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#999',
+    color: COLORS.muted,
   },
 });
 

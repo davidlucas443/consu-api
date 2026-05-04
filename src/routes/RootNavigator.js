@@ -36,8 +36,8 @@ export const RootNavigator = () => (
         tabBarActiveTintColor: COLORS.primary,
         tabBarInactiveTintColor: '#ccc',
         tabBarStyle: {
-          backgroundColor: COLORS.white,
-          borderTopColor: '#e0e0e0',
+          backgroundColor: COLORS.surface,
+          borderTopColor: COLORS.border,
         },
       })}
     >
